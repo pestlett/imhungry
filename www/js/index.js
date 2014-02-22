@@ -31,8 +31,14 @@ var app = {
             var map, mapOptions, position;
 
             navigator.geolocation.getCurrentPosition(function (position) {
+                var longitude, latitude;
+
+                longitude = position.coords.longitude || 150.644;
+                latitude = position.coords.latitude || -34.397;
+
+                alert(latitude, longitude);
                 mapOptions = {
-                  center: new google.maps.LatLng(-34.397, 150.644),
+                  center: new google.maps.LatLng(latitude, longitude),
                   zoom: 8
                 };
                 map = new google.maps.Map(document.getElementById("map-canvas"),
@@ -49,13 +55,13 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+        // var parentElement = document.getElementById(id);
+        // var listeningElement = parentElement.querySelector('.listening');
+        // var receivedElement = parentElement.querySelector('.received');
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+        // listeningElement.setAttribute('style', 'display:none;');
+        // receivedElement.setAttribute('style', 'display:block;');
 
-        console.log('Received Event: ' + id);
+        // console.log('Received Event: ' + id);
     }
 };
