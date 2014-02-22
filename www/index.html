@@ -30,6 +30,7 @@
     <body>
         <div class="app">
             <h1>I'm Hungry</h1>
+            <button id="btn1">Click me to test</button>
             <div id="map-canvas"></div>
         </div>
         <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -37,6 +38,9 @@
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
+            $("#btn1").on('click tap', function (e) {
+                $('h1').html('Don\'t click so hard');
+            });
             $('h1').html('You\'re hungry');
         </script>
     </body>
