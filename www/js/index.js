@@ -35,6 +35,7 @@ var app = {
 
                 longitude = position.coords.longitude || 150.644;
                 latitude = position.coords.latitude || -34.397;
+                $('h1').html('You\'re hungry here...' + latitude + ', ' + longitude);
 
                 alert(latitude, longitude);
                 mapOptions = {
