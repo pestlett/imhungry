@@ -53,7 +53,7 @@
                 });
             });
         google.maps.event.addDomListener(window, 'load', function () {
-            var map, mapOptions, position;
+            var map, mapOptions, position, initialLocation;
 
             mapOptions = {
               center: new google.maps.LatLng(-34.397, 150.644),
@@ -62,23 +62,24 @@
             map = new google.maps.Map($("#map-canvas")[0],
                 mapOptions);
 
-            navigator.geolocation.getCurrentPosition(function (position) {
-                var longitude, latitude;
+            if (navigator.geolocation) {
+                $('h1').html('we have geolocation');
 
-                longitude = position.coords.longitude || 150.644;
-                latitude = position.coords.latitude || -34.397;
-                $('h1').html('You\'re hungry here...' + latitude + ', ' + longitude);
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var longitude, latitude;
 
-                alert(latitude, longitude);
-                mapOptions = {
-                  center: new google.maps.LatLng(latitude, longitude),
-                  zoom: 8
-                };
-                map = new google.maps.Map($("#map-canvas")[0],
-                    mapOptions);
-            });
+                    longitude = position.coords.longitude || 150.644;
+                    latitude = position.coords.latitude || -34.397;
+                    $('h1').html('You\'re hungry here...' + latitude + ', ' + longitude);
+
+                    initialLocation = new google.maps.LatLng(latitude, longitude);
+                    map.setCenter(initialLocation);
+                });
+            } else {
+                $('h1').html('we have no geolocation');
+            }
         });
-            $('h1').html('You\'re hungry');
+            //$('h1').html('You\'re hungry');
         </script>
     </body>
 </html>
