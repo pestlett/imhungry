@@ -27,6 +27,18 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        google.maps.event.addDomListener(window, 'load', function () {
+            var map, mapOptions, position;
+
+            navigator.geolocation.getCurrentPosition(function (position) {
+                mapOptions = {
+                  center: new google.maps.LatLng(-34.397, 150.644),
+                  zoom: 8
+                };
+                map = new google.maps.Map(document.getElementById("map-canvas"),
+                    mapOptions);
+            });
+        });
     },
     // deviceready Event Handler
     //
