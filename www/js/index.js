@@ -27,25 +27,6 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
-        google.maps.event.addDomListener(window, 'load', function () {
-            var map, mapOptions, position;
-
-            navigator.geolocation.getCurrentPosition(function (position) {
-                var longitude, latitude;
-
-                longitude = position.coords.longitude || 150.644;
-                latitude = position.coords.latitude || -34.397;
-                $('h1').html('You\'re hungry here...' + latitude + ', ' + longitude);
-
-                alert(latitude, longitude);
-                mapOptions = {
-                  center: new google.maps.LatLng(latitude, longitude),
-                  zoom: 8
-                };
-                map = new google.maps.Map(document.getElementById("map-canvas"),
-                    mapOptions);
-            });
-        });
     },
     // deviceready Event Handler
     //
