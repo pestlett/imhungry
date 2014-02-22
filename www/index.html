@@ -33,13 +33,17 @@
             <button id="btn1">Click me to test</button>
             <div id="map-canvas"></div>
         </div>
-        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.js"></script>
         <script type="text/javascript" src="phonegap.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
-            $("#btn1").on('click tap', function (e) {
-                $('h1').html('Don\'t click so hard');
+            $(document).on('pageinit', function (e) {
+                $("#btn1").click(function (e) {
+                    $('h1').html('Don\'t click so hard');
+                });
             });
             $('h1').html('You\'re hungry');
         </script>
