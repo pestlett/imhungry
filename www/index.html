@@ -28,11 +28,9 @@
         <title>I'm Hungry</title>
     </head>
     <body>
-        <div class="app">
             <h1>I'm Hungry</h1>
             <button id="btn1">Click me to test</button>
-            <div id="map-canvas" style="width: 100%; height: 100%;"></div>
-        </div>
+            <div id="map-canvas" style="width: 100%; height: 500px;"></div>
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.css" />
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.js"></script>
@@ -68,8 +66,8 @@
                 navigator.geolocation.getCurrentPosition(function (position) {
                     var longitude, latitude;
 
-                    longitude = position.coords.longitude || 150.644;
-                    latitude = position.coords.latitude || -34.397;
+                    longitude = position.coords.longitude || 13;
+                    latitude = position.coords.latitude || 52;
                     $('h1').html('You\'re hungry here...' + latitude + ', ' + longitude);
 
                     initialLocation = new google.maps.LatLng(latitude, longitude);
