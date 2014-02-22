@@ -43,6 +43,13 @@
             $(document).on('pageinit', function (e) {
                 $("#btn1").click(function (e) {
                     $('h1').html('Don\'t click so hard');
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                var longitude, latitude;
+
+                longitude = position.coords.longitude || 150.644;
+                latitude = position.coords.latitude || -34.397;
+                        $('h1').html('LatLon: ' + latitude + ', ' + longitude);
+                    });
                 });
             });
         google.maps.event.addDomListener(window, 'load', function () {
