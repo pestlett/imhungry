@@ -44,10 +44,16 @@ iah.init = function (options) {
   },
   {
   	enableHighAccuracy: true,
-  	timeout: 1000,
+  	timeout: 3000,
   	maximumAge: 0
   });
 };
+
+iah.whereami = function () {
+	if (iah.currentLocation !== null) {
+		return google.maps.LatLng(iah.currentLocation.coords.latitude, iah.currentLocation.coords.longitude);
+	}
+}
 
 iah.findLocation() {
 	goog.searchLocality(iah.radius, iah.places,

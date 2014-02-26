@@ -5,6 +5,7 @@ var goog = goog || {};
  * @type {Object}
  */
 goog.map = null;
+goog.markers = [];
 
 goog.loadMap = function (el, position, options) {
 	var latitude, longitude;
@@ -19,10 +20,6 @@ goog.loadMap = function (el, position, options) {
 	goog.map = new google.maps.Map(el, options);
 
 	return goog.map;
-};
-
-goog.whereami = function () {
-	
 };
 
 goog.changeLocation = function (position) {
@@ -41,4 +38,20 @@ goog.changeZoom = function (zoomLevel) {
 	zoomLevel = Math.min(18, Math.max(13, zoomLevel));
 
 	goog.map.setZoom(zoomLevel);
+};
+
+goog.addMarker = function (options) {
+	if (!options.position) { return false; }
+	if (!options.position) { return false; }
+
+	options.map = goog.map;
+
+	goog.markers.push(new google.maps.Marker(options));
+};
+
+goog.removeMarker = function (marker) {
+	marker.setMap(null);
+	if ($.inArray(marker, goog.markers) > -1) {
+		goog.markers.splice($.inArray(marker, goog.markers), 1);
+	}
 };

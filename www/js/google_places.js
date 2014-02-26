@@ -9,7 +9,7 @@ goog.searchLocality = function (radius, types, callback) {
 	radius = Math.min(500, Math.max(0, radius));
 
 	goog.services.nearbySearch({
-		location: google.maps.LatLng(iah.currentLocation.coords.latitude, iah.currentLocation.coords.longitude),
+		location: iah.whereami(),
 		radius: radius,
 		type: types
 	}, callback);
