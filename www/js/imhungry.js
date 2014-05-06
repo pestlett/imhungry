@@ -59,7 +59,9 @@ iah.findLocation() {
 	goog.searchLocality(iah.radius, iah.places,
 	function (results, status) {
 		if (status === google.maps.places.PlacesServiceStatus.OK) {
-
+			for (var i=0, l=results.length; i<l; i++) {
+				goog.addMarker(results[i]);
+			}
 		}
 	});
 };
