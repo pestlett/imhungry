@@ -32,20 +32,20 @@ iah.init = function (options) {
       goog.loadMap(options.el, position.coords);
   },
   function (positionError) {
-  	console.log(positionError);
+    console.log(positionError);
   });
 
   iah.geo.watchPosition(function (position) {
-  	iah.currentLocation = position;
-  	goog.changeLocation(position.coords);
+    iah.currentLocation = position;
+    goog.changeLocation(position.coords);
   },
   function (positionError) {
-  	console.log(positionError);
+    console.log(positionError);
   },
   {
-  	enableHighAccuracy: true,
-  	timeout: 3000,
-  	maximumAge: 0
+    enableHighAccuracy: true,
+    timeout: 3000,
+    maximumAge: 0
   });
 };
 
@@ -53,9 +53,9 @@ iah.whereami = function () {
 	if (iah.currentLocation !== null) {
 		return google.maps.LatLng(iah.currentLocation.coords.latitude, iah.currentLocation.coords.longitude);
 	}
-}
+};
 
-iah.findLocation() {
+iah.findLocation = function () {
 	goog.searchLocality(iah.radius, iah.places,
 	function (results, status) {
 		if (status === google.maps.places.PlacesServiceStatus.OK) {
