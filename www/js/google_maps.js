@@ -18,6 +18,12 @@ goog.loadMap = function (el, position, options) {
 	options.zoom = options.zoom || 8;
 
 	goog.map = new google.maps.Map(el, options);
+	goog.addMarker(true, {
+		position: options.center
+	});
+
+	// Initalise google places services for later use
+	goog.services = new google.maps.places.PlacesService(goog.map);
 
 	return goog.map;
 };
@@ -28,6 +34,10 @@ goog.changeLocation = function (position) {
 	if (!position.longitude) { return false; }
 
 	goog.map.setCenter(new google.maps.LatLng(position.latitude, position.longitude));
+
+	if (goog.ourMarker !== null) {
+		goog.ourMarker.setPosition(new google.maps.LatLng(position.latitude, position.longitude));
+	}
 };
 
 goog.changeZoom = function (zoomLevel) {
@@ -40,18 +50,22 @@ goog.changeZoom = function (zoomLevel) {
 	goog.map.setZoom(zoomLevel);
 };
 
-goog.addMarker = function (options) {
-	if (!options.position) { return false; }
+goog.addMarker = function (ourMarker, options) {
 	if (!options.position) { return false; }
 
 	options.map = goog.map;
 
-	goog.markers.push(new google.maps.Marker(options));
+	if (ourMarker) {
+		goog.ourMarker = new google.maps.Marker(options);
+	} else {
+		goog.markers.push(new google.maps.Marker(options));
+	}
 };
 
 goog.removeMarker = function (marker) {
+	var markerIndex = $.inArray(marker, goog.markers);
 	marker.setMap(null);
-	if ($.inArray(marker, goog.markers) > -1) {
-		goog.markers.splice($.inArray(marker, goog.markers), 1);
+	if (markerIndex > -1) {
+		goog.markers.splice(markerIndex, 1);
 	}
 };
