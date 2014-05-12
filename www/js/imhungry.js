@@ -56,28 +56,34 @@ iah.init = function (options) {
   });
 };
 
+iah.LatLng = function (lat, lng) {
+  return new google.maps.LatLng(lat, lng);
+};
+
 iah.whereami = function () {
   if (iah.currentLocation !== null) {
-    return new google.maps.LatLng(iah.currentLocation.coords.latitude, iah.currentLocation.coords.longitude);
+    return iah.LatLng(iah.currentLocation.coords.latitude, iah.currentLocation.coords.longitude);
   }
 };
 
 iah.findLocation = function () {
   goog.searchLocality(iah.radius, iah.places,
-  function (results, status) {
+  function (results, status, pagination) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
       for (var i=0, l=results.length, result; i<l; i++) {
         result = results[i];
-        if (!result.opening_hours) { continue; }
-        if (result.opening_hours.open_now === false) { continue; }
-        goog.addMarker(false, {
-          position: result.geometry.location//,
-          // icon: result.icon
+        // if (!result.opening_hours) { continue; }
+        // if (result.opening_hours.open_now === false) { continue; }
+        goog.addPlace(result);
+        goog.calculateRoute({
+          origin: iah.whereami(),
+          destination: result.geometry.location
         });
+        return;
       }
 
       if (goog.markers.length === 0) {
-        $('h1').html('There\'s nowhere open nearby, sorry. Try lieferando.')
+        $('h1').html('There\'s nowhere open nearby, sorry. Try lieferando.');
       }
     }
   });
